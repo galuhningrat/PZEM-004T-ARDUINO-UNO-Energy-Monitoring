@@ -1,52 +1,76 @@
 #include "mainwindow.h"
-#include <QDateTime>
-#include <QVBoxLayout>
+#include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
-    QVBoxLayout *layout = new QVBoxLayout(this);
-    timeLabel = new QLabel("Time: ", this);
-    voltageLabel = new QLabel("Voltage: ", this);
-    currentLabel = new QLabel("Current: ", this);
-    powerLabel = new QLabel("Power: ", this);
-    energyLabel = new QLabel("Energy: ", this);
-    frequencyLabel = new QLabel("Frequency: ", this);
-    pfLabel = new QLabel("Power Factor: ", this);
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
 
-    layout->addWidget(timeLabel);
-    layout->addWidget(voltageLabel);
-    layout->addWidget(currentLabel);
-    layout->addWidget(powerLabel);
-    layout->addWidget(energyLabel);
-    layout->addWidget(frequencyLabel);
-    layout->addWidget(pfLabel);
-
-    serial = new QSerialPort(this);
-    serial->setPortName("COM3"); // Ganti dengan port yang sesuai
-    serial->setBaudRate(QSerialPort::Baud9600);
-    connect(serial, &QSerialPort::readyRead, this, &MainWindow::readSerialData);
-    serial->open(QIODevice::ReadOnly);
+    serialPort = new QSerialPort(this);
+    serialPort->setPortName("/dev/ttyUSB0"); // Replace with the appropriate serial port name
+    serialPort->setBaudRate(QSerialPort::Baud9600);
+    serialPort->open(QIODevice::ReadWrite);
 
     timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &MainWindow::updateTime);
-    timer->start(1000);
+    connect(timer, &QTimer::timeout, this, &MainWindow::readData);
+    timer->start(1000); // Read data every 1 second
 }
 
-void MainWindow::readSerialData() {
-    while (serial->canReadLine()) {
-        QString line = serial->readLine();
-        QStringList data = line.split(" ");
-        if (data.size() >= 12) {
-            voltageLabel->setText("Voltage: " + data[1] + "V");
-            currentLabel->setText("Current: " + data[3] + "A");
-            powerLabel->setText("Power: " + data[5] + "W");
-            energyLabel->setText("Energy: " + data[7] + "kWh");
-            frequencyLabel->setText("Frequency: " + data[9] + "Hz");
-            pfLabel->setText("Power Factor: " + data[11]);
-        }
+MainWindow::~MainWindow()
+{
+    delete ui;
+    delete serialPort;
+    delete timer;
+}
+
+void MainWindow::readData()
+{
+    serialPort->write("v");
+    serialPort->waitForBytesWritten();
+    if (serialPort->waitForReadyRead()) {
+        voltage = serialPort->readLine().toFloat();
     }
+
+    serialPort->write("c");
+    serialPort->waitForBytesWritten();
+    if (serialPort->waitForReadyRead()) {
+        current = serialPort->readLine().toFloat();
+    }
+
+    serialPort->write("p");
+    serialPort->waitForBytesWritten();
+    if (serialPort->waitForReadyRead()) {
+        power = serialPort->readLine().toFloat();
+    }
+
+    serialPort->write("e");
+    serialPort->waitForBytesWritten();
+    if (serialPort->waitForReadyRead()) {
+        energy = serialPort->readLine().toFloat();
+    }
+
+    serialPort->write("f");
+    serialPort->waitForBytesWritten();
+    if (serialPort->waitForReadyRead()) {
+        frequency = serialPort->readLine().toFloat();
+    }
+
+    serialPort->write("q");
+    serialPort->waitForBytesWritten();
+    if (serialPort->waitForReadyRead()) {
+        powerFactor = serialPort->readLine().toFloat();
+    }
+
+    updateValues();
 }
 
-void MainWindow::updateTime() {
-    QDateTime currentTime = QDateTime::currentDateTime();
-    timeLabel->setText("Time: " + currentTime.toString("hh:mm:ss"));
+void MainWindow::updateValues()
+{
+    ui->voltageLabel->setText(QString("Voltage (V): %1").arg(voltage));
+    ui->currentLabel->setText(QString("Current (A): %1").arg(current));
+    ui->powerLabel->setText(QString("Power (W): %1").arg(power));
+    ui->energyLabel->setText(QString("Energy (kWh): %1").arg(energy));
+    ui->frequencyLabel->setText(QString("Frequency (Hz): %1").arg(frequency));
+    ui->pfLabel->setText(QString("Power Factor: %1").arg(powerFactor));
 }
