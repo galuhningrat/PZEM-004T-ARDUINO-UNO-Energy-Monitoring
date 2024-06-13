@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Energy Mpnitor</string>
+   <string>Energy Monitor</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="">
@@ -19,7 +19,7 @@
      <rect>
       <x>20</x>
       <y>10</y>
-      <width>108</width>
+      <width>281</width>
       <height>288</height>
      </rect>
     </property>

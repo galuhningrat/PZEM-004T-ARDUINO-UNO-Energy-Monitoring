@@ -1,9 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#define ARDUINO_UNO_VENDOR_ID 0x2341
-#define ARDUINO_UNO_PRODUCT_ID 0x0043
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -12,20 +9,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Set up QSerialPort
     arduino = new QSerialPort;
-    arduino_is_available = false;
     arduino_port_name = "COM7";
-
-    foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()) {
-        if (serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier()) {
-            if (serialPortInfo.vendorIdentifier() == ARDUINO_UNO_VENDOR_ID) {
-                if (serialPortInfo.productIdentifier() == ARDUINO_UNO_PRODUCT_ID) {
-                    arduino_port_name = serialPortInfo.portName();
-                    arduino_is_available = true;
-                    qDebug() << "Arduino found on port:" << arduino_port_name;
-                }
-            }
-        }
-    }
+    arduino_is_available = true;
 
     if (arduino_is_available) {
         arduino->setPortName(arduino_port_name);
@@ -63,50 +48,60 @@ MainWindow::~MainWindow()
 void MainWindow::readData()
 {
     if (arduino->isOpen()) {
-        arduino->write("v");
-        arduino->waitForBytesWritten();
-        if (arduino->waitForReadyRead()) {
-            voltage = arduino->readLine().toFloat();
-        }
+        static const char commands[] = {'v', 'c', 'p', 'e', 'f', 'q'};
+        static int commandIndex = 0;
 
-        arduino->write("c");
+        arduino->write(&commands[commandIndex], 1);
         arduino->waitForBytesWritten();
-        if (arduino->waitForReadyRead()) {
-            current = arduino->readLine().toFloat();
-        }
 
-        arduino->write("p");
-        arduino->waitForBytesWritten();
-        if (arduino->waitForReadyRead()) {
-            power = arduino->readLine().toFloat();
-        }
-
-        arduino->write("e");
-        arduino->waitForBytesWritten();
-        if (arduino->waitForReadyRead()) {
-            energy = arduino->readLine().toFloat();
-        }
-
-        arduino->write("f");
-        arduino->waitForBytesWritten();
-        if (arduino->waitForReadyRead()) {
-            frequency = arduino->readLine().toFloat();
-        }
-
-        arduino->write("q");
-        arduino->waitForBytesWritten();
-        if (arduino->waitForReadyRead()) {
-            powerFactor = arduino->readLine().toFloat();
-        }
-
-        updateValues();
+        commandIndex = (commandIndex + 1) % (sizeof(commands) / sizeof(commands[0]));
     } else {
         qDebug() << "Serial port not open.";
     }
 }
 
+void MainWindow::readSerial()
+{
+    while (arduino->canReadLine()) {
+        QByteArray serialData = arduino->readLine();
+        QString data = QString::fromStdString(serialData.toStdString()).trimmed();
+        bool ok;
+        float value = data.toFloat(&ok);
+        static char lastCommand = '\0';
+
+        if (ok) {
+            switch (lastCommand) {
+            case 'v':
+                voltage = value;
+                break;
+            case 'c':
+                current = value;
+                break;
+            case 'p':
+                power = value;
+                break;
+            case 'e':
+                energy = value;
+                break;
+            case 'f':
+                frequency = static_cast<int>(value);
+                break;
+            case 'q':
+                powerFactor = value;
+                break;
+            }
+            updateValues();
+        }
+
+        if (!data.isEmpty()) {
+            lastCommand = data[0].toLatin1();
+        }
+    }
+}
+
 void MainWindow::updateValues()
 {
+    ui->timeLabel->setText(QString("Time: %1").arg(QTime::currentTime().toString()));
     ui->voltageLabel->setText(QString("Voltage (V): %1").arg(voltage));
     ui->currentLabel->setText(QString("Current (A): %1").arg(current));
     ui->powerLabel->setText(QString("Power (W): %1").arg(power));

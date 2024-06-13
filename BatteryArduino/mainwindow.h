@@ -1,8 +1,5 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#define ARDUINO_UNO_VENDOR_ID 0x2341
-#define ARDUINO_UNO_PRODUCT_ID 0x0043
-
 
 #include <QSerialPort>
 #include <QSerialPortInfo>
@@ -10,7 +7,6 @@
 #include <QtWidgets>
 #include <QtGui>
 #include <QMainWindow>
-#include <QSerialPort>
 #include <QTimer>
 
 QT_BEGIN_NAMESPACE
@@ -27,6 +23,7 @@ public:
 
 private slots:
     void readData();
+    void readSerial();
     void updateValues();
 
 private:
@@ -40,7 +37,7 @@ private:
     float current;
     float power;
     float energy;
-    float frequency;
+    int frequency;
     float powerFactor;
 };
 

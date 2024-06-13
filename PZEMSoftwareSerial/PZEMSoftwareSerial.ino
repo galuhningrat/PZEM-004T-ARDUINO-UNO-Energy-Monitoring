@@ -2,8 +2,8 @@
 #include <SoftwareSerial.h>
 
 // Replace with the appropriate pins for your Arduino board
-#define PZEM_RX_PIN 2
-#define PZEM_TX_PIN 3
+#define PZEM_RX_PIN 13
+#define PZEM_TX_PIN 12
 
 SoftwareSerial pzemSerial(PZEM_RX_PIN, PZEM_TX_PIN);
 PZEM004Tv30 pzem(pzemSerial);
