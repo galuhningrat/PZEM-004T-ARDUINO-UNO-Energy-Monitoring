@@ -1,16 +1,51 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#define ARDUINO_UNO_VENDOR_ID 0x2341
+#define ARDUINO_UNO_PRODUCT_ID 0x0043
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
-    serialPort = new QSerialPort(this);
-    serialPort->setPortName("/dev/ttyUSB0"); // Replace with the appropriate serial port name
-    serialPort->setBaudRate(QSerialPort::Baud9600);
-    serialPort->open(QIODevice::ReadWrite);
+    // Set up QSerialPort
+    arduino = new QSerialPort;
+    arduino_is_available = false;
+    arduino_port_name = "COM7";
+
+    foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()) {
+        if (serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier()) {
+            if (serialPortInfo.vendorIdentifier() == ARDUINO_UNO_VENDOR_ID) {
+                if (serialPortInfo.productIdentifier() == ARDUINO_UNO_PRODUCT_ID) {
+                    arduino_port_name = serialPortInfo.portName();
+                    arduino_is_available = true;
+                    qDebug() << "Arduino found on port:" << arduino_port_name;
+                }
+            }
+        }
+    }
+
+    if (arduino_is_available) {
+        arduino->setPortName(arduino_port_name);
+        arduino->setBaudRate(QSerialPort::Baud9600);
+        arduino->setDataBits(QSerialPort::Data8);
+        arduino->setParity(QSerialPort::NoParity);
+        arduino->setStopBits(QSerialPort::OneStop);
+        arduino->setFlowControl(QSerialPort::NoFlowControl);
+
+        if (arduino->open(QSerialPort::ReadWrite)) {
+            qDebug() << "Serial port opened successfully.";
+            // Slot for updating value
+            QObject::connect(arduino, SIGNAL(readyRead()), this, SLOT(readSerial()));
+        } else {
+            qDebug() << "Failed to open serial port.";
+            QMessageBox::warning(this, "Port error", "Couldn't open the serial port.");
+        }
+    } else {
+        QMessageBox::warning(this, "Port error", "Couldn't find Arduino");
+    }
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::readData);
@@ -19,50 +54,55 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    if (arduino->isOpen()) {
+        arduino->close();
+    }
     delete ui;
-    delete serialPort;
-    delete timer;
 }
 
 void MainWindow::readData()
 {
-    serialPort->write("v");
-    serialPort->waitForBytesWritten();
-    if (serialPort->waitForReadyRead()) {
-        voltage = serialPort->readLine().toFloat();
-    }
+    if (arduino->isOpen()) {
+        arduino->write("v");
+        arduino->waitForBytesWritten();
+        if (arduino->waitForReadyRead()) {
+            voltage = arduino->readLine().toFloat();
+        }
 
-    serialPort->write("c");
-    serialPort->waitForBytesWritten();
-    if (serialPort->waitForReadyRead()) {
-        current = serialPort->readLine().toFloat();
-    }
+        arduino->write("c");
+        arduino->waitForBytesWritten();
+        if (arduino->waitForReadyRead()) {
+            current = arduino->readLine().toFloat();
+        }
 
-    serialPort->write("p");
-    serialPort->waitForBytesWritten();
-    if (serialPort->waitForReadyRead()) {
-        power = serialPort->readLine().toFloat();
-    }
+        arduino->write("p");
+        arduino->waitForBytesWritten();
+        if (arduino->waitForReadyRead()) {
+            power = arduino->readLine().toFloat();
+        }
 
-    serialPort->write("e");
-    serialPort->waitForBytesWritten();
-    if (serialPort->waitForReadyRead()) {
-        energy = serialPort->readLine().toFloat();
-    }
+        arduino->write("e");
+        arduino->waitForBytesWritten();
+        if (arduino->waitForReadyRead()) {
+            energy = arduino->readLine().toFloat();
+        }
 
-    serialPort->write("f");
-    serialPort->waitForBytesWritten();
-    if (serialPort->waitForReadyRead()) {
-        frequency = serialPort->readLine().toFloat();
-    }
+        arduino->write("f");
+        arduino->waitForBytesWritten();
+        if (arduino->waitForReadyRead()) {
+            frequency = arduino->readLine().toFloat();
+        }
 
-    serialPort->write("q");
-    serialPort->waitForBytesWritten();
-    if (serialPort->waitForReadyRead()) {
-        powerFactor = serialPort->readLine().toFloat();
-    }
+        arduino->write("q");
+        arduino->waitForBytesWritten();
+        if (arduino->waitForReadyRead()) {
+            powerFactor = arduino->readLine().toFloat();
+        }
 
-    updateValues();
+        updateValues();
+    } else {
+        qDebug() << "Serial port not open.";
+    }
 }
 
 void MainWindow::updateValues()
