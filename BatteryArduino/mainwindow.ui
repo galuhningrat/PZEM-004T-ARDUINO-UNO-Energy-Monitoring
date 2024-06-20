@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>793</width>
-    <height>350</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -32,7 +32,7 @@
       <x>10</x>
       <y>80</y>
       <width>771</width>
-      <height>181</height>
+      <height>441</height>
      </rect>
     </property>
     <property name="title">
@@ -103,7 +103,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>110</y>
+       <y>80</y>
        <width>751</width>
        <height>22</height>
       </rect>
@@ -160,6 +160,494 @@
       </item>
      </layout>
     </widget>
+    <widget class="QWidget" name="layoutWidget_4">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>120</y>
+       <width>751</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="historicalDataLayout3">
+      <item>
+       <widget class="QLabel" name="historicalTimeLabel3">
+        <property name="text">
+         <string>Time 3:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalVoltageLabel3">
+        <property name="text">
+         <string>Voltage (V):</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalCurrentLabel3">
+        <property name="text">
+         <string>Current:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalPowerLabel3">
+        <property name="text">
+         <string>Power:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalEnergyLabel3">
+        <property name="text">
+         <string>Energy:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalFrequencyLabel3">
+        <property name="text">
+         <string>Frequency:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalPfLabel3">
+        <property name="text">
+         <string>PF:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget_5">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>160</y>
+       <width>751</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="historicalDataLayout4">
+      <item>
+       <widget class="QLabel" name="historicalTimeLabel4">
+        <property name="text">
+         <string>Time 4:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalVoltageLabel4">
+        <property name="text">
+         <string>Voltage (V):</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalCurrentLabel4">
+        <property name="text">
+         <string>Current:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalPowerLabel4">
+        <property name="text">
+         <string>Power:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalEnergyLabel4">
+        <property name="text">
+         <string>Energy:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalFrequencyLabel4">
+        <property name="text">
+         <string>Frequency:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalPfLabel4">
+        <property name="text">
+         <string>PF:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget_6">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>240</y>
+       <width>751</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="historicalDataLayout6">
+      <item>
+       <widget class="QLabel" name="historicalTimeLabel6">
+        <property name="text">
+         <string>Time 6:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalVoltageLabel6">
+        <property name="text">
+         <string>Voltage (V):</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalCurrentLabel6">
+        <property name="text">
+         <string>Current:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalPowerLabel6">
+        <property name="text">
+         <string>Power:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalEnergyLabel6">
+        <property name="text">
+         <string>Energy:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalFrequencyLabel6">
+        <property name="text">
+         <string>Frequency:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalPfLabel6">
+        <property name="text">
+         <string>PF:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget_7">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>200</y>
+       <width>751</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="historicalDataLayout5">
+      <item>
+       <widget class="QLabel" name="historicalTimeLabel5">
+        <property name="text">
+         <string>Time 5:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalVoltageLabel5">
+        <property name="text">
+         <string>Voltage (V):</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalCurrentLabel5">
+        <property name="text">
+         <string>Current:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalPowerLabel5">
+        <property name="text">
+         <string>Power:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalEnergyLabel5">
+        <property name="text">
+         <string>Energy:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalFrequencyLabel5">
+        <property name="text">
+         <string>Frequency:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalPfLabel5">
+        <property name="text">
+         <string>PF:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget_8">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>320</y>
+       <width>751</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="historicalDataLayout8">
+      <item>
+       <widget class="QLabel" name="historicalTimeLabel8">
+        <property name="text">
+         <string>Time 8:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalVoltageLabel8">
+        <property name="text">
+         <string>Voltage (V):</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalCurrentLabel8">
+        <property name="text">
+         <string>Current:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalPowerLabel8">
+        <property name="text">
+         <string>Power:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalEnergyLabel8">
+        <property name="text">
+         <string>Energy:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalFrequencyLabel8">
+        <property name="text">
+         <string>Frequency:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalPfLabel8">
+        <property name="text">
+         <string>PF:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget_9">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>280</y>
+       <width>751</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="historicalDataLayout7">
+      <item>
+       <widget class="QLabel" name="historicalTimeLabel7">
+        <property name="text">
+         <string>Time 7:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalVoltageLabel7">
+        <property name="text">
+         <string>Voltage (V):</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalCurrentLabel7">
+        <property name="text">
+         <string>Current:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalPowerLabel7">
+        <property name="text">
+         <string>Power:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalEnergyLabel7">
+        <property name="text">
+         <string>Energy:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalFrequencyLabel7">
+        <property name="text">
+         <string>Frequency:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalPfLabel7">
+        <property name="text">
+         <string>PF:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget_10">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>360</y>
+       <width>751</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="historicalDataLayout9">
+      <item>
+       <widget class="QLabel" name="historicalTimeLabel9">
+        <property name="text">
+         <string>Time 9:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalVoltageLabel9">
+        <property name="text">
+         <string>Voltage (V):</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalCurrentLabel9">
+        <property name="text">
+         <string>Current:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalPowerLabel9">
+        <property name="text">
+         <string>Power:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalEnergyLabel9">
+        <property name="text">
+         <string>Energy:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalFrequencyLabel9">
+        <property name="text">
+         <string>Frequency:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalPfLabel9">
+        <property name="text">
+         <string>PF:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget_11">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>400</y>
+       <width>751</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="historicalDataLayout10">
+      <item>
+       <widget class="QLabel" name="historicalTimeLabel10">
+        <property name="text">
+         <string>Time 10:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalVoltageLabel10">
+        <property name="text">
+         <string>Voltage (V):</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalCurrentLabel10">
+        <property name="text">
+         <string>Current:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalPowerLabel10">
+        <property name="text">
+         <string>Power:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalEnergyLabel10">
+        <property name="text">
+         <string>Energy:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalFrequencyLabel10">
+        <property name="text">
+         <string>Frequency:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="historicalPfLabel10">
+        <property name="text">
+         <string>PF:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
@@ -180,7 +668,7 @@
       <x>10</x>
       <y>20</y>
       <width>771</width>
-      <height>22</height>
+      <height>21</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -241,7 +729,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>793</width>
+     <width>800</width>
      <height>25</height>
     </rect>
    </property>
