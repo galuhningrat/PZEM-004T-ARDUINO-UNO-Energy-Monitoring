@@ -56,6 +56,6 @@ void loop() {
         Serial.println(pf);
     }
 
-    delay(1000);
+    delay(2000);
 }
 
