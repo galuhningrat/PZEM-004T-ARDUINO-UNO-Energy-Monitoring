@@ -1,12 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QSerialPort>
-#include <QSerialPortInfo>
-#include <QDebug>
-#include <QtWidgets>
-#include <QtGui>
 #include <QMainWindow>
+#include <QSerialPort>
 #include <QTimer>
 
 QT_BEGIN_NAMESPACE
@@ -23,22 +19,14 @@ public:
 
 private slots:
     void readData();
-    void readSerial();
-    void updateValues();
 
 private:
     Ui::MainWindow *ui;
-    QSerialPort *arduino;
+    QSerialPort *serial;
     QTimer *timer;
-    QString arduino_port_name;
-    bool arduino_is_available;
+    QStringList historicalData;
 
-    float voltage;
-    float current;
-    float power;
-    float energy;
-    int frequency;
-    float powerFactor;
+    void updateHistoricalData(QString data);
 };
 
 #endif // MAINWINDOW_H

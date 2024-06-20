@@ -1,111 +1,90 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QTime>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , serial(new QSerialPort(this))
+    , timer(new QTimer(this))
 {
     ui->setupUi(this);
 
-    // Set up QSerialPort
-    arduino = new QSerialPort;
-    arduino_port_name = "COM7";
-    arduino_is_available = true;
+    serial->setPortName("COM10");
+    serial->setBaudRate(QSerialPort::Baud115200);
+    serial->setDataBits(QSerialPort::Data8);
+    serial->setParity(QSerialPort::NoParity);
+    serial->setStopBits(QSerialPort::OneStop);
+    serial->setFlowControl(QSerialPort::NoFlowControl);
 
-    if (arduino_is_available) {
-        arduino->setPortName(arduino_port_name);
-        arduino->setBaudRate(QSerialPort::Baud9600);
-        arduino->setDataBits(QSerialPort::Data8);
-        arduino->setParity(QSerialPort::NoParity);
-        arduino->setStopBits(QSerialPort::OneStop);
-        arduino->setFlowControl(QSerialPort::NoFlowControl);
+    connect(serial, &QSerialPort::readyRead, this, &MainWindow::readData);
 
-        if (arduino->open(QSerialPort::ReadWrite)) {
-            qDebug() << "Serial port opened successfully.";
-            // Slot for updating value
-            QObject::connect(arduino, SIGNAL(readyRead()), this, SLOT(readSerial()));
-        } else {
-            qDebug() << "Failed to open serial port.";
-            QMessageBox::warning(this, "Port error", "Couldn't open the serial port.");
-        }
+    if (serial->open(QIODevice::ReadOnly)) {
+        qDebug() << "Serial port opened successfully.";
     } else {
-        QMessageBox::warning(this, "Port error", "Couldn't find Arduino");
+        qDebug() << "Failed to open serial port.";
     }
 
-    timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &MainWindow::readData);
-    timer->start(1000); // Read data every 1 second
+    connect(timer, &QTimer::timeout, [=]() {
+        if (!historicalData.isEmpty()) {
+            updateHistoricalData(historicalData.takeFirst());
+        }
+    });
+    timer->start(2000);  // Update historical data every 2 seconds
 }
 
 MainWindow::~MainWindow()
 {
-    if (arduino->isOpen()) {
-        arduino->close();
-    }
     delete ui;
 }
 
 void MainWindow::readData()
 {
-    if (arduino->isOpen()) {
-        static const char commands[] = {'v', 'c', 'p', 'e', 'f', 'q'};
-        static int commandIndex = 0;
+    QByteArray data = serial->readAll();
+    QString dataString(data);
+    QStringList values = dataString.split(',');
 
-        arduino->write(&commands[commandIndex], 1);
-        arduino->waitForBytesWritten();
+    if (values.size() == 6) {
+        QString timeStamp = QTime::currentTime().toString("hh:mm:ss");
 
-        commandIndex = (commandIndex + 1) % (sizeof(commands) / sizeof(commands[0]));
-    } else {
-        qDebug() << "Serial port not open.";
+        ui->currentTimeLabel->setText("Time: " + timeStamp);
+        ui->currentVoltageLabel->setText("Voltage (V): " + values[0]);
+        ui->currentCurrentLabel->setText("Current (A): " + values[1]);
+        ui->currentPowerLabel->setText("Power (W): " + values[2]);
+        ui->currentEnergyLabel->setText("Energy (kWh): " + values[3]);
+        ui->currentFrequencyLabel->setText("Frequency (Hz): " + values[4]);
+        ui->currentPfLabel->setText("PF: " + values[5]);
+
+        QString historicalEntry = timeStamp + "," + values.join(',');
+        historicalData.append(historicalEntry);
     }
 }
 
-void MainWindow::readSerial()
+void MainWindow::updateHistoricalData(QString data)
 {
-    while (arduino->canReadLine()) {
-        QByteArray serialData = arduino->readLine();
-        QString data = QString::fromStdString(serialData.toStdString()).trimmed();
-        bool ok;
-        float value = data.toFloat(&ok);
-        static char lastCommand = '\0';
+    QStringList values = data.split(',');
 
-        if (ok) {
-            switch (lastCommand) {
-            case 'v':
-                voltage = value;
-                break;
-            case 'c':
-                current = value;
-                break;
-            case 'p':
-                power = value;
-                break;
-            case 'e':
-                energy = value;
-                break;
-            case 'f':
-                frequency = static_cast<int>(value);
-                break;
-            case 'q':
-                powerFactor = value;
-                break;
-            }
-            updateValues();
-        }
+    if (values.size() == 7) {
+        ui->historicalTimeLabel1->setText("Time 1: " + values[0]);
+        ui->historicalVoltageLabel1->setText("Voltage (V): " + values[1]);
+        ui->historicalCurrentLabel1->setText("Current: " + values[2]);
+        ui->historicalPowerLabel1->setText("Power: " + values[3]);
+        ui->historicalEnergyLabel1->setText("Energy: " + values[4]);
+        ui->historicalFrequencyLabel1->setText("Frequency: " + values[5]);
+        ui->historicalPfLabel1->setText("PF: " + values[6]);
 
-        if (!data.isEmpty()) {
-            lastCommand = data[0].toLatin1();
+        if (!historicalData.isEmpty()) {
+            QString nextData = historicalData.takeFirst();
+            values = nextData.split(',');
+
+            ui->historicalTimeLabel2->setText("Time 2: " + values[0]);
+            ui->historicalVoltageLabel2->setText("Voltage (V): " + values[1]);
+            ui->historicalCurrentLabel2->setText("Current: " + values[2]);
+            ui->historicalPowerLabel2->setText("Power: " + values[3]);
+            ui->historicalEnergyLabel2->setText("Energy: " + values[4]);
+            ui->historicalFrequencyLabel2->setText("Frequency: " + values[5]);
+            ui->historicalPfLabel2->setText("PF: " + values[6]);
         }
     }
-}
-
-void MainWindow::updateValues()
-{
-    ui->timeLabel->setText(QString("Time: %1").arg(QTime::currentTime().toString()));
-    ui->voltageLabel->setText(QString("Voltage (V): %1").arg(voltage));
-    ui->currentLabel->setText(QString("Current (A): %1").arg(current));
-    ui->powerLabel->setText(QString("Power (W): %1").arg(power));
-    ui->energyLabel->setText(QString("Energy (kWh): %1").arg(energy));
-    ui->frequencyLabel->setText(QString("Frequency (Hz): %1").arg(frequency));
-    ui->pfLabel->setText(QString("Power Factor: %1").arg(powerFactor));
 }
