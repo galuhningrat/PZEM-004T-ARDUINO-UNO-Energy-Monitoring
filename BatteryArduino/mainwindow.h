@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QSerialPort>
 #include <QTimer>
+#include <QLabel>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,6 +26,22 @@ private:
     QSerialPort *serial;
     QTimer *timer;
     QStringList historicalData;
+
+    QLabel *currentTimeValue;
+    QLabel *currentVoltageValue;
+    QLabel *currentCurrentValue;
+    QLabel *currentPowerValue;
+    QLabel *currentEnergyValue;
+    QLabel *currentFrequencyValue;
+    QLabel *currentPfValue;
+
+    QList<QLabel*> historicalTimeLabels;
+    QList<QLabel*> historicalVoltageLabels;
+    QList<QLabel*> historicalCurrentLabels;
+    QList<QLabel*> historicalPowerLabels;
+    QList<QLabel*> historicalEnergyLabels;
+    QList<QLabel*> historicalFrequencyLabels;
+    QList<QLabel*> historicalPfLabels;
 
     void updateHistoricalData(QString data);
 };

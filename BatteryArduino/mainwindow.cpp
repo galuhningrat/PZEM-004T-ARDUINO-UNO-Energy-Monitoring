@@ -11,7 +11,66 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    serial->setPortName("COM10");  // Ganti sesuai port yang digunakan
+    // Connect the labels to the UI
+    ui->verticalLayoutTime->addWidget(ui->currentTimeValue);
+    ui->verticalLayoutVoltage->addWidget(ui->currentVoltageValue);
+    ui->verticalLayoutCurrent->addWidget(ui->currentCurrentValue);
+    ui->verticalLayoutPower->addWidget(ui->currentPowerValue);
+    ui->verticalLayoutEnergy->addWidget(ui->currentEnergyValue);
+    ui->verticalLayoutFrequency->addWidget(ui->currentFrequencyValue);
+    ui->verticalLayoutPf->addWidget(ui->currentPfValue);
+
+    // Initialize the historical data label lists
+    historicalTimeLabels = {
+        ui->historicalTimeLabel1, ui->historicalTimeLabel2, ui->historicalTimeLabel3,
+        ui->historicalTimeLabel4, ui->historicalTimeLabel5, ui->historicalTimeLabel6,
+        ui->historicalTimeLabel7, ui->historicalTimeLabel8, ui->historicalTimeLabel9,
+        ui->historicalTimeLabel10
+    };
+
+    historicalVoltageLabels = {
+        ui->historicalVoltageLabel1, ui->historicalVoltageLabel2, ui->historicalVoltageLabel3,
+        ui->historicalVoltageLabel4, ui->historicalVoltageLabel5, ui->historicalVoltageLabel6,
+        ui->historicalVoltageLabel7, ui->historicalVoltageLabel8, ui->historicalVoltageLabel9,
+        ui->historicalVoltageLabel10
+    };
+
+    historicalCurrentLabels = {
+        ui->historicalCurrentLabel1, ui->historicalCurrentLabel2, ui->historicalCurrentLabel3,
+        ui->historicalCurrentLabel4, ui->historicalCurrentLabel5, ui->historicalCurrentLabel6,
+        ui->historicalCurrentLabel7, ui->historicalCurrentLabel8, ui->historicalCurrentLabel9,
+        ui->historicalCurrentLabel10
+    };
+
+    historicalPowerLabels = {
+        ui->historicalPowerLabel1, ui->historicalPowerLabel2, ui->historicalPowerLabel3,
+        ui->historicalPowerLabel4, ui->historicalPowerLabel5, ui->historicalPowerLabel6,
+        ui->historicalPowerLabel7, ui->historicalPowerLabel8, ui->historicalPowerLabel9,
+        ui->historicalPowerLabel10
+    };
+
+    historicalEnergyLabels = {
+        ui->historicalEnergyLabel1, ui->historicalEnergyLabel2, ui->historicalEnergyLabel3,
+        ui->historicalEnergyLabel4, ui->historicalEnergyLabel5, ui->historicalEnergyLabel6,
+        ui->historicalEnergyLabel7, ui->historicalEnergyLabel8, ui->historicalEnergyLabel9,
+        ui->historicalEnergyLabel10
+    };
+
+    historicalFrequencyLabels = {
+        ui->historicalFrequencyLabel1, ui->historicalFrequencyLabel2, ui->historicalFrequencyLabel3,
+        ui->historicalFrequencyLabel4, ui->historicalFrequencyLabel5, ui->historicalFrequencyLabel6,
+        ui->historicalFrequencyLabel7, ui->historicalFrequencyLabel8, ui->historicalFrequencyLabel9,
+        ui->historicalFrequencyLabel10
+    };
+
+    historicalPfLabels = {
+        ui->historicalPfLabel1, ui->historicalPfLabel2, ui->historicalPfLabel3,
+        ui->historicalPfLabel4, ui->historicalPfLabel5, ui->historicalPfLabel6,
+        ui->historicalPfLabel7, ui->historicalPfLabel8, ui->historicalPfLabel9,
+        ui->historicalPfLabel10
+    };
+
+    serial->setPortName("COM10"); // Set the correct port name
     serial->setBaudRate(QSerialPort::Baud115200);
     serial->setDataBits(QSerialPort::Data8);
     serial->setParity(QSerialPort::NoParity);
@@ -48,13 +107,13 @@ void MainWindow::readData()
     if (values.size() == 6) {
         QString timeStamp = QTime::currentTime().toString("hh:mm:ss");
 
-        ui->currentTimeLabel->setText("Time: " + timeStamp);
-        ui->currentVoltageLabel->setText("Voltage (V): " + values[0]);
-        ui->currentCurrentLabel->setText("Current (A): " + values[1]);
-        ui->currentPowerLabel->setText("Power (W): " + values[2]);
-        ui->currentEnergyLabel->setText("Energy (kWh): " + values[3]);
-        ui->currentFrequencyLabel->setText("Frequency (Hz): " + values[4]);
-        ui->currentPfLabel->setText("PF: " + values[5]);
+        ui->currentTimeValue->setText(timeStamp);
+        ui->currentVoltageValue->setText(values[0]);
+        ui->currentCurrentValue->setText(values[1]);
+        ui->currentPowerValue->setText(values[2]);
+        ui->currentEnergyValue->setText(values[3]);
+        ui->currentFrequencyValue->setText(values[4]);
+        ui->currentPfValue->setText(values[5]);
 
         QString historicalEntry = timeStamp + "," + values.join(',');
         historicalData.append(historicalEntry);
@@ -65,33 +124,25 @@ void MainWindow::updateHistoricalData(QString data)
 {
     QStringList values = data.split(',');
 
-    QList<QLabel*> timeLabels = {ui->historicalTimeLabel1, ui->historicalTimeLabel2, ui->historicalTimeLabel3, ui->historicalTimeLabel4, ui->historicalTimeLabel5, ui->historicalTimeLabel6, ui->historicalTimeLabel7, ui->historicalTimeLabel8, ui->historicalTimeLabel9, ui->historicalTimeLabel10};
-    QList<QLabel*> voltageLabels = {ui->historicalVoltageLabel1, ui->historicalVoltageLabel2, ui->historicalVoltageLabel3, ui->historicalVoltageLabel4, ui->historicalVoltageLabel5, ui->historicalVoltageLabel6, ui->historicalVoltageLabel7, ui->historicalVoltageLabel8, ui->historicalVoltageLabel9, ui->historicalVoltageLabel10};
-    QList<QLabel*> currentLabels = {ui->historicalCurrentLabel1, ui->historicalCurrentLabel2, ui->historicalCurrentLabel3, ui->historicalCurrentLabel4, ui->historicalCurrentLabel5, ui->historicalCurrentLabel6, ui->historicalCurrentLabel7, ui->historicalCurrentLabel8, ui->historicalCurrentLabel9, ui->historicalCurrentLabel10};
-    QList<QLabel*> powerLabels = {ui->historicalPowerLabel1, ui->historicalPowerLabel2, ui->historicalPowerLabel3, ui->historicalPowerLabel4, ui->historicalPowerLabel5, ui->historicalPowerLabel6, ui->historicalPowerLabel7, ui->historicalPowerLabel8, ui->historicalPowerLabel9, ui->historicalPowerLabel10};
-    QList<QLabel*> energyLabels = {ui->historicalEnergyLabel1, ui->historicalEnergyLabel2, ui->historicalEnergyLabel3, ui->historicalEnergyLabel4, ui->historicalEnergyLabel5, ui->historicalEnergyLabel6, ui->historicalEnergyLabel7, ui->historicalEnergyLabel8, ui->historicalEnergyLabel9, ui->historicalEnergyLabel10};
-    QList<QLabel*> frequencyLabels = {ui->historicalFrequencyLabel1, ui->historicalFrequencyLabel2, ui->historicalFrequencyLabel3, ui->historicalFrequencyLabel4, ui->historicalFrequencyLabel5, ui->historicalFrequencyLabel6, ui->historicalFrequencyLabel7, ui->historicalFrequencyLabel8, ui->historicalFrequencyLabel9, ui->historicalFrequencyLabel10};
-    QList<QLabel*> pfLabels = {ui->historicalPfLabel1, ui->historicalPfLabel2, ui->historicalPfLabel3, ui->historicalPfLabel4, ui->historicalPfLabel5, ui->historicalPfLabel6, ui->historicalPfLabel7, ui->historicalPfLabel8, ui->historicalPfLabel9, ui->historicalPfLabel10};
-
     if (values.size() == 7) {
-        // Shift existing data
-        for (int i = 9; i > 0; --i) {
-            timeLabels[i]->setText(timeLabels[i - 1]->text());
-            voltageLabels[i]->setText(voltageLabels[i - 1]->text());
-            currentLabels[i]->setText(currentLabels[i - 1]->text());
-            powerLabels[i]->setText(powerLabels[i - 1]->text());
-            energyLabels[i]->setText(energyLabels[i - 1]->text());
-            frequencyLabels[i]->setText(frequencyLabels[i - 1]->text());
-            pfLabels[i]->setText(pfLabels[i - 1]->text());
-        }
+        // Update the historical data labels
+        historicalTimeLabels[0]->setText(values[0]);
+        historicalVoltageLabels[0]->setText(values[1]);
+        historicalCurrentLabels[0]->setText(values[2]);
+        historicalPowerLabels[0]->setText(values[3]);
+        historicalEnergyLabels[0]->setText(values[4]);
+        historicalFrequencyLabels[0]->setText(values[5]);
+        historicalPfLabels[0]->setText(values[6]);
 
-        // Update the first row with new data
-        timeLabels[0]->setText("Time: " + values[0]);
-        voltageLabels[0]->setText("Voltage (V): " + values[1]);
-        currentLabels[0]->setText("Current (A): " + values[2]);
-        powerLabels[0]->setText("Power (W): " + values[3]);
-        energyLabels[0]->setText("Energy (kWh): " + values[4]);
-        frequencyLabels[0]->setText("Frequency (Hz): " + values[5]);
-        pfLabels[0]->setText("PF: " + values[6]);
+        // Shift the remaining data down
+        for (int i = 9; i >= 1; i--) {
+            historicalTimeLabels[i]->setText(historicalTimeLabels[i - 1]->text());
+            historicalVoltageLabels[i]->setText(historicalVoltageLabels[i - 1]->text());
+            historicalCurrentLabels[i]->setText(historicalCurrentLabels[i - 1]->text());
+            historicalPowerLabels[i]->setText(historicalPowerLabels[i - 1]->text());
+            historicalEnergyLabels[i]->setText(historicalEnergyLabels[i - 1]->text());
+            historicalFrequencyLabels[i]->setText(historicalFrequencyLabels[i - 1]->text());
+            historicalPfLabels[i]->setText(historicalPfLabels[i - 1]->text());
+        }
     }
 }
