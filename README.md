@@ -1,30 +1,11 @@
-# Battery Monitoring System dengan Qt dan Arduino
+# Battery Monitoring System dengan Qt dan Arduino (updates & upgrades)
 
-Proyek ini adalah sistem pemantauan baterai real-time menggunakan Qt untuk antarmuka pengguna dan Arduino untuk pengumpulan data. Sistem ini menampilkan berbagai parameter baterai, termasuk tegangan, arus, daya, energi, frekuensi, dan faktor daya, serta menampilkan persentase daya baterai secara visual menggunakan QProgressBar.
+Project ini adalah real-time battery monitoring system menggunakan Qt untuk user interface dan Arduino untuk pengumpulan data. Sistem ini menampilkan berbagai parameter baterai, termasuk tegangan, arus, daya, energi, frekuensi, dan faktor daya, serta menampilkan persentase daya baterai secara visual menggunakan QProgressBar.
 
 ## Fitur
 
-- Membaca data dari sensor PZEM-004T melalui Arduino
 - Menampilkan parameter baterai secara real-time
 - Visualisasi persentase daya baterai menggunakan QProgressBar
-- Penyimpanan data historis
-- Antarmuka pengguna yang intuitif dengan Qt
-
-## Instalasi
-
-1. Clone repositori ini:
-   ```
-   git clone https://github.com/username/battery-monitoring-system.git
-   ```
-2. Buka proyek Qt di Qt Creator
-3. Build dan jalankan proyek
-
-## Penggunaan
-
-1. Hubungkan Arduino Anda yang sudah diprogram dengan sensor PZEM-004T ke komputer
-2. Jalankan aplikasi Qt
-3. Pilih port serial yang sesuai dan klik "Connect"
-4. Data baterai akan mulai ditampilkan secara real-time
 
 ## Kode Program
 
@@ -92,9 +73,7 @@ void MainWindow::readData()
 }
 ```
 
-4. Pastikan bahwa QProgressBar dengan nama "persentase" sudah ada di file `mainwindow.ui`. Jika belum, tambahkan melalui Qt Designer atau langsung di kode XML.
-
-5. (Kustomisasi) Jika Anda ingin mengubah tampilan QProgressBar, Anda bisa menambahkan stylesheet di konstruktor `MainWindow`:
+4. (Kustomisasi) Mengubah tampilan QProgressBar, menambahkan stylesheet di konstruktor `MainWindow`:
 
 ```cpp
 MainWindow::MainWindow(QWidget *parent)
@@ -136,5 +115,5 @@ Pastikan untuk menyesuaikan nilai `maxPower` dengan kapasitas maksimum baterai y
 
 Kontribusi untuk proyek ini sangat diterima. Silakan fork repositori ini dan buat pull request dengan perubahan Anda.
 
-
+## Visit my Blog
 https://mf234.blogspot.com/2024/06/implementasi-pemantauan-data-energi.html
