@@ -5,6 +5,7 @@
 #include <QSerialPort>
 #include <QTimer>
 #include <QLabel>
+#include <QProgressBar>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -26,6 +27,9 @@ private:
     QSerialPort *serial;
     QTimer *timer;
     QStringList historicalData;
+
+    QProgressBar *powerProgressBar;
+    float maxExpectedPower;
 
     QLabel *currentTimeValue;
     QLabel *currentVoltageValue;

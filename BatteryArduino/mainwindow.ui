@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -48,7 +51,7 @@
       <height>71</height>
      </rect>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -217,7 +220,7 @@
         <height>351</height>
        </rect>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -278,7 +281,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -291,55 +294,55 @@
         <item>
          <widget class="QLabel" name="historicalTimeLabel1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalVoltageLabel1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalCurrentLabel1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPowerLabel1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalEnergyLabel1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalFrequencyLabel1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPfLabel1">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -352,55 +355,55 @@
         <item>
          <widget class="QLabel" name="historicalTimeLabel2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalVoltageLabel2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalCurrentLabel2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPowerLabel2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalEnergyLabel2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalFrequencyLabel2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPfLabel2">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -413,55 +416,55 @@
         <item>
          <widget class="QLabel" name="historicalTimeLabel3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalVoltageLabel3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalCurrentLabel3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPowerLabel3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalEnergyLabel3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalFrequencyLabel3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPfLabel3">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -474,55 +477,55 @@
         <item>
          <widget class="QLabel" name="historicalTimeLabel4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalVoltageLabel4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalCurrentLabel4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPowerLabel4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalEnergyLabel4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalFrequencyLabel4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPfLabel4">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -535,55 +538,55 @@
         <item>
          <widget class="QLabel" name="historicalTimeLabel5">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalVoltageLabel5">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalCurrentLabel5">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPowerLabel5">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalEnergyLabel5">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalFrequencyLabel5">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPfLabel5">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -596,55 +599,55 @@
         <item>
          <widget class="QLabel" name="historicalTimeLabel6">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalVoltageLabel6">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalCurrentLabel6">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPowerLabel6">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalEnergyLabel6">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalFrequencyLabel6">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPfLabel6">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -657,55 +660,55 @@
         <item>
          <widget class="QLabel" name="historicalTimeLabel7">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalVoltageLabel7">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalCurrentLabel7">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPowerLabel7">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalEnergyLabel7">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalFrequencyLabel7">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPfLabel7">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -718,55 +721,55 @@
         <item>
          <widget class="QLabel" name="historicalTimeLabel8">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalVoltageLabel8">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalCurrentLabel8">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPowerLabel8">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalEnergyLabel8">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalFrequencyLabel8">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPfLabel8">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -779,55 +782,55 @@
         <item>
          <widget class="QLabel" name="historicalTimeLabel9">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalVoltageLabel9">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalCurrentLabel9">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPowerLabel9">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalEnergyLabel9">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalFrequencyLabel9">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPfLabel9">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -840,49 +843,49 @@
         <item>
          <widget class="QLabel" name="historicalTimeLabel10">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalVoltageLabel10">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalCurrentLabel10">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPowerLabel10">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalEnergyLabel10">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalFrequencyLabel10">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="historicalPfLabel10">
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -890,6 +893,19 @@
       </widget>
      </widget>
     </widget>
+   </widget>
+   <widget class="QProgressBar" name="persentase">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>490</y>
+      <width>221</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="value">
+     <number>24</number>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

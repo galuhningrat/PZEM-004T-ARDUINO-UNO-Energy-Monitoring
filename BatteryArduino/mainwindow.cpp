@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
     , serial(new QSerialPort(this))
     , timer(new QTimer(this))
+    , maxExpectedPower(6.0)
 {
     ui->setupUi(this);
 
@@ -70,7 +71,23 @@ MainWindow::MainWindow(QWidget *parent)
         ui->historicalPfLabel10
     };
 
-    serial->setPortName("COM10"); // Set the correct port name
+    powerProgressBar = ui->persentase;
+    powerProgressBar->setRange(0, 100);
+    powerProgressBar->setValue(0);
+    powerProgressBar->setTextVisible(true);
+    powerProgressBar->setStyleSheet(
+        "QProgressBar {"
+        "   border: 2px solid grey;"
+        "   border-radius: 5px;"
+        "   text-align: center;"
+        "}"
+        "QProgressBar::chunk {"
+        "   background-color: #05B8CC;"
+        "   width: 20px;"
+        "}"
+        );
+
+    serial->setPortName("COM10");
     serial->setBaudRate(QSerialPort::Baud115200);
     serial->setDataBits(QSerialPort::Data8);
     serial->setParity(QSerialPort::NoParity);
@@ -90,7 +107,7 @@ MainWindow::MainWindow(QWidget *parent)
             updateHistoricalData(historicalData.takeFirst());
         }
     });
-    timer->start(2000);  // Update historical data every 2 seconds
+    timer->start(1000);  // Update historical data every 2 seconds
 }
 
 MainWindow::~MainWindow()
@@ -114,6 +131,12 @@ void MainWindow::readData()
         ui->currentEnergyValue->setText(values[3]);
         ui->currentFrequencyValue->setText(values[4]);
         ui->currentPfValue->setText(values[5]);
+
+        float power = values[2].toFloat();
+        int percentage = qRound((power / maxExpectedPower) * 100);
+        percentage = qMin(percentage, 100);
+        powerProgressBar->setValue(percentage);
+        powerProgressBar->setFormat(QString("%1% (%2W / %3W)").arg(percentage).arg(power, 0, 'f', 1).arg(maxExpectedPower, 0, 'f', 1));
 
         QString historicalEntry = timeStamp + "," + values.join(',');
         historicalData.append(historicalEntry);
