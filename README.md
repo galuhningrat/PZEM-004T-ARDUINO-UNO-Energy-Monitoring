@@ -113,7 +113,7 @@ Pastikan untuk menyesuaikan nilai `maxPower` dengan kapasitas maksimum baterai y
 
 ## Kontribusi
 
-Kontribusi untuk proyek ini sangat diterima. Silakan fork repositori ini dan buat pull request dengan perubahan Anda.
+Kontribusi untuk project ini sangat diterima. Silakan fork repositori ini dan buat pull request dengan perubahan Anda.
 
 ## Visit my Blog
 https://mf234.blogspot.com/2024/06/implementasi-pemantauan-data-energi.html
